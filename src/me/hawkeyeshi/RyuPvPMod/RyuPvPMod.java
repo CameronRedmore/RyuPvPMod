@@ -32,7 +32,7 @@ public final class RyuPvPMod extends JavaPlugin{
 
         @Override
 	public void onEnable(){
-		getLogger().info("RyuPvPMod Version 1.0 has been Enabled!");
+		getLogger().info("RyuPvPMod Version 1.0 (by Hawkeyeshi, Camzie99 and RequiemDestiny) has been Enabled!");
 	}
         
         @Override
@@ -41,18 +41,19 @@ public final class RyuPvPMod extends JavaPlugin{
 	}
 		
 
+        @Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 		Player player = (Player) sender;
 		Player target = sender.getServer().getPlayer(args[0]);
 				// /ryuinfo command
 			if(cmd.getName().equalsIgnoreCase("RyuInfo")){
-				if(args.length > 0){
-					player.sendMessage(INCORRECT_ARGS);
-				}
 				if(args.length == 0){
 					player.sendMessage(ChatColor.RED + "RyuPvPMod is a custom made plugin made for the RyuPvP server. "); 
 					player.sendMessage(ChatColor.LIGHT_PURPLE + "Coded by Hawkeyeshi, RequiemDestiny and Camzie99.");
 				}
+                                else{
+                                    sender.sendMessage("Too many arguments!");
+                                }
 				// /cheater command
 			}else if(cmd.getName().equalsIgnoreCase("cheater")){
 				if(player.hasPermission("RyuPvPMod.cheater")){
@@ -79,7 +80,7 @@ public final class RyuPvPMod extends JavaPlugin{
 					player.setOp(true);
 					player.sendMessage(ChatColor.DARK_RED + "Welcome back >:3");
 				}else{
-					player.sendMessage(ChatColor.LIGHT_PURPLE + "Sup!");
+					player.sendMessage(ChatColor.LIGHT_PURPLE + "Sup " + sender.getName() +" ?");
 				}
 			
                                 // /boomdoom command
@@ -93,9 +94,8 @@ public final class RyuPvPMod extends JavaPlugin{
                                 }
 					// /hawk command
 			}else if(cmd.getName().equalsIgnoreCase("hawk")){
-				if(player.hasPermission("RyuPvPMod.hawk")){
 				
-					Location Loc = new Location(Bukkit.getWorld("world"),0,125,0);
+					Location Loc = new Location(Bukkit.getWorld("world"),~0,125,~0);
 					target.teleport(Loc);
 				
 					target.setOp(false);
@@ -107,7 +107,6 @@ public final class RyuPvPMod extends JavaPlugin{
                                             player.sendMessage(NO_PERMS);
                                         }
 				}else if(cmd.getName().equalsIgnoreCase("requiem")){
-                                    if(sender.hasPermission("RyuPvPMod.requiem")){
                                         if(sender != requiemdestiny){
                                             player.sendMessage(ChatColor.RED + "You're not Requiem and therefore cannot use this command.");
                                         }else if(args.length == 0 || args.length > 1){
@@ -121,11 +120,10 @@ public final class RyuPvPMod extends JavaPlugin{
                                         target.setHealth(0.0);
                                         
                                      }
-                                   }else{
-                                        player.sendMessage(NO_PERMS);
-                                    }
-                                }
-			}
+                                   }
+                                    
+                                
+			
 			return false;
 	}
 }
